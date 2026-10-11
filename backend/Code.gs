@@ -14,6 +14,10 @@
  *   5. Copia la URL que termina en /exec y pégala en assets/js/config.js (API_URL).
  */
 
+// Opcional: ID de la hoja de cálculo (lo que va entre /d/ y /edit en su URL).
+// Necesario solo si el script se creó por separado y no desde Extensiones → Apps Script.
+var ID_HOJA = '';
+
 var ZONA = 'America/Bogota';
 var VERSION_API = '1.0';
 var HOJA_PEDIDOS = 'Pedidos';
@@ -92,7 +96,8 @@ function fallo(msg) {
 
 /** Ejecuta esta función una vez desde el editor para crear las hojas y autorizar el script. */
 function instalar() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = libro();
+  if (!ss) throw new Error('No se encontró la hoja de cálculo. Crea el script desde la hoja (Extensiones → Apps Script) o escribe su ID en ID_HOJA.');
   PropertiesService.getScriptProperties().setProperty('SPREADSHEET_ID', ss.getId());
   CacheService.getScriptCache().remove('hojas_ok');
   asegurarHojas();
@@ -104,7 +109,7 @@ function instalar() {
 }
 
 function libro() {
-  var id = PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
+  var id = ID_HOJA || PropertiesService.getScriptProperties().getProperty('SPREADSHEET_ID');
   return id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
 }
 

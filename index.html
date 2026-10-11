@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>LLEGO · Pescados y mariscos | Chocopez</title>
+  <meta name="description" content="Pide pescados y mariscos por libra o por kilo. Domicilio o recogida en sitio, con seguimiento de tu pedido.">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="LLEGO · Pescados y mariscos">
+  <meta property="og:description" content="Elige tu producto por libra o por kilo y recíbelo a domicilio o recógelo en nuestro punto.">
+  <meta property="og:image" content="assets/img/productos/corvina.jpg">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='900' font-size='30' fill='%23fff' text-anchor='middle'%3ELL%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" id="demoBanner" hidden>Modo demostración: los pedidos se guardan solo en este navegador.</div>
+
+  <header class="topbar">
+    <div class="container topbar-in">
+      <a class="brand" href="./" aria-label="LLEGO, inicio">
+        <span class="brand-name">LLEGO</span>
+        <span class="brand-sub">por Chocopez</span>
+      </a>
+      <nav class="topnav" aria-label="Principal">
+        <a class="link-plain" href="seguimiento.html">Seguir pedido</a>
+        <button class="cart-btn" id="cartBtn" type="button" aria-label="Ver mi pedido">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="cart-total-top" id="cartTotalTop">Mi pedido</span>
+          <span class="cart-count" id="cartCount" aria-live="polite">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <span class="pill">Piloto · Productos limitados</span>
+      <h1>Pescados y mariscos,<br>directo a tu mesa.</h1>
+      <p class="lead">Elige tu producto, la cantidad por <strong>libra</strong> o por <strong>kilo</strong> y decide si te lo llevamos a domicilio o lo recoges en nuestro punto.</p>
+      <ol class="steps">
+        <li><b>1</b><span><strong>Elige</strong> producto, unidad y cantidad</span></li>
+        <li><b>2</b><span><strong>Selecciona</strong> domicilio o recoger en sitio</span></li>
+        <li><b>3</b><span><strong>Sigue</strong> el estado de tu pedido en línea</span></li>
+      </ol>
+    </section>
+
+    <section class="section" id="catalogo" aria-labelledby="tituloProductos">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="tituloProductos">Productos</h2>
+          <p class="muted small">Precios en pesos colombianos (COP) · 1 libra = 500 g · 1 kilo = 1.000 g</p>
+        </div>
+        <div class="notice" id="closedNotice" hidden>En este momento no estamos recibiendo pedidos. Vuelve pronto.</div>
+        <div class="grid" id="productGrid" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="./"><span class="brand-name">LLEGO</span><span class="brand-sub">por Chocopez</span></a>
+          <p class="muted" style="margin-top:12px">Pescados y mariscos por libra o por kilo. Piloto de pedidos en línea.</p>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <ul id="footerContact"></ul>
+        </div>
+        <div>
+          <h4>Información</h4>
+          <ul>
+            <li><a href="seguimiento.html">Seguir mi pedido</a></li>
+            <li><a href="politica.html#datos">Política de tratamiento de datos</a></li>
+            <li><a href="politica.html#terminos">Términos y condiciones</a></li>
+            <li><a href="https://www.sic.gov.co" target="_blank" rel="noopener">Superintendencia de Industria y Comercio</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="legal">© <span id="anio">2026</span> <span data-negocio="razonSocial">Chocopez</span>. Datos personales tratados conforme a la Ley 1581 de 2012 y el Decreto 1377 de 2013.</p>
+    </div>
+  </footer>
+
+  <button class="mobile-bar" id="mobileBar" type="button" aria-label="Ver mi pedido">
+    <span class="mb-info"><small id="mbCount">0 productos</small><strong id="mbTotal">$0</strong></span>
+    <span class="mb-cta">Ver pedido</span>
+  </button>
+
+  <!-- Panel del pedido -->
+  <div class="backdrop" id="backdrop" hidden></div>
+  <aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+    <div class="drawer-head">
+      <button class="icon-btn" id="drawerBack" type="button" aria-label="Volver" hidden>&larr;</button>
+      <h2 id="drawerTitle">Tu pedido</h2>
+      <button class="icon-btn" id="drawerClose" type="button" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="drawer-steps" id="drawerSteps" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <div class="drawer-body" id="drawerBody">
+      <!-- Paso 1: carrito -->
+      <section data-view="carrito" id="viewCarrito"></section>
+
+      <!-- Paso 2: datos de entrega -->
+      <section data-view="datos" hidden>
+        <form class="form" id="checkoutForm" novalidate>
+          <fieldset>
+            <legend>¿Cómo quieres recibirlo?</legend>
+            <div class="choice-grid">
+              <label class="choice">
+                <input type="radio" name="tipoEntrega" value="DOMICILIO" checked>
+                <span class="choice-box"><strong>Domicilio</strong><small>Te lo llevamos a tu dirección.</small></span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="tipoEntrega" value="RECOGER">
+                <span class="choice-box"><strong>Recoger en sitio</strong><small>Pasas por nuestro punto.</small></span>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Tus datos</legend>
+            <div class="field" data-campo="nombre">
+              <label for="fNombre">Nombre completo</label>
+              <input id="fNombre" name="nombre" autocomplete="name" maxlength="80" required>
+            </div>
+            <div class="field" data-campo="telefono">
+              <label for="fTelefono">Celular</label>
+              <input id="fTelefono" name="telefono" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="300 123 4567" required>
+            </div>
+            <div class="field" data-campo="correo">
+              <label for="fCorreo">Correo <span class="opt">(opcional)</span></label>
+              <input id="fCorreo" name="correo" type="email" autocomplete="email" maxlength="100">
+            </div>
+          </fieldset>
+
+          <fieldset data-solo="DOMICILIO">
+            <legend>Dirección de entrega</legend>
+            <div class="field" data-campo="direccion">
+              <label for="fDireccion">Dirección</label>
+              <input id="fDireccion" name="direccion" autocomplete="street-address" maxlength="120" placeholder="Calle 10 # 20-30">
+            </div>
+            <div class="row-2">
+              <div class="field" data-campo="barrio">
+                <label for="fBarrio">Barrio</label>
+                <input id="fBarrio" name="barrio" maxlength="60">
+              </div>
+              <div class="field" data-campo="ciudad">
+                <label for="fCiudad">Ciudad</label>
+                <input id="fCiudad" name="ciudad" autocomplete="address-level2" maxlength="60">
+              </div>
+            </div>
+            <div class="field" data-campo="indicaciones">
+              <label for="fIndicaciones">Indicaciones <span class="opt">(opcional)</span></label>
+              <input id="fIndicaciones" name="indicaciones" maxlength="200" placeholder="Torre, apartamento, punto de referencia">
+            </div>
+            <div class="field" data-campo="franja">
+              <label for="fFranja">¿Cuándo lo quieres?</label>
+              <select id="fFranja" name="franja"></select>
+            </div>
+            <p class="hint" id="coberturaHint" hidden></p>
+          </fieldset>
+
+          <fieldset data-solo="RECOGER" hidden>
+            <legend>Punto de recogida</legend>
+            <div class="info-box" id="pickupInfo"></div>
+            <div class="row-2">
+              <div class="field" data-campo="fechaRecogida">
+                <label for="fFechaRecogida">Fecha</label>
+                <input id="fFechaRecogida" name="fechaRecogida" type="date">
+              </div>
+              <div class="field" data-campo="franjaRecogida">
+                <label for="fFranjaRecogida">Hora</label>
+                <select id="fFranjaRecogida" name="franjaRecogida"></select>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Medio de pago</legend>
+            <div class="radio-list" id="pagoList" data-campo="pago"></div>
+            <p class="hint">Esta plataforma no procesa pagos en línea: pagas al recibir o recoger tu pedido.</p>
+          </fieldset>
+
+          <div class="field" data-campo="observaciones">
+            <label for="fObs">Observaciones <span class="opt">(opcional)</span></label>
+            <textarea id="fObs" name="observaciones" maxlength="300" placeholder="Ej.: llamar antes de llegar"></textarea>
+          </div>
+
+          <div class="hp" aria-hidden="true">
+            <label for="fWeb">No llenar este campo</label>
+            <input id="fWeb" name="web" tabindex="-1" autocomplete="off">
+          </div>
+
+          <label class="consent" data-campo="consentimiento">
+            <input type="checkbox" name="consentimiento" id="fConsent">
+            <span>Autorizo de manera previa, expresa e informada a <strong data-negocio="razonSocial">Chocopez</strong> para tratar mis datos personales con el fin de gestionar, entregar y hacer seguimiento a mi pedido, de acuerdo con la <a href="politica.html#datos" target="_blank">Política de Tratamiento de Datos Personales</a> (Ley 1581 de 2012). Acepto los <a href="politica.html#terminos" target="_blank">Términos y condiciones</a>.</span>
+          </label>
+
+          <div class="form-error" id="formError" role="alert" hidden></div>
+        </form>
+      </section>
+
+      <!-- Paso 3: confirmación -->
+      <section data-view="listo" id="viewListo" hidden></section>
+    </div>
+
+    <div class="drawer-foot" id="drawerFoot">
+      <div class="totals" id="totals"></div>
+      <button class="btn btn-primary btn-block btn-lg" id="primaryBtn" type="button">Continuar</button>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/productos.js"></script>
+  <script src="assets/js/comun.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/tienda.js"></script>
+</body>
+</html>

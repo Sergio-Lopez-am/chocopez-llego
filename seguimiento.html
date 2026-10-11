@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Seguir mi pedido · LLEGO</title>
+  <meta name="description" content="Consulta el estado de tu pedido LLEGO: recibido, en alistamiento, en camino o entregado.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='900' font-size='30' fill='%23fff' text-anchor='middle'%3ELL%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="demo-banner" id="demoBanner" hidden>Modo demostración: los pedidos se guardan solo en este navegador.</div>
+  <header class="topbar">
+    <div class="container topbar-in">
+      <a class="brand" href="./" aria-label="LLEGO, inicio">
+        <span class="brand-name">LLEGO</span>
+        <span class="brand-sub">por Chocopez</span>
+      </a>
+      <nav class="topnav"><a class="btn btn-ghost" href="./">Ir a la tienda</a></nav>
+    </div>
+  </header>
+
+  <main class="track-wrap">
+    <!-- Consulta -->
+    <section id="vistaForm">
+      <h1>Seguir mi pedido</h1>
+      <p class="lead">Escribe el código que recibiste al hacer tu pedido y el celular con el que lo registraste.</p>
+      <form class="form track-card" id="trackForm" style="margin-top:24px" novalidate>
+        <div class="field">
+          <label for="tCodigo">Código del pedido</label>
+          <input id="tCodigo" name="codigo" placeholder="LL-0001" autocapitalize="characters" autocomplete="off" maxlength="12" required>
+        </div>
+        <div class="field">
+          <label for="tTelefono">Celular</label>
+          <input id="tTelefono" name="telefono" type="tel" inputmode="numeric" placeholder="300 123 4567" maxlength="14" required>
+        </div>
+        <div class="form-error" id="trackError" role="alert" hidden></div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="trackBtn">Consultar estado</button>
+      </form>
+      <div id="misPedidos" style="margin-top:28px"></div>
+    </section>
+
+    <!-- Resultado -->
+    <section id="vistaPedido" hidden>
+      <div class="track-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <span class="badge badge-plain" id="pCodigo">LL-0000</span>
+          <span class="small muted" id="pActualizado"></span>
+        </div>
+        <div class="track-status">
+          <h1 id="pEstado">—</h1>
+          <p class="lead" id="pDescripcion" style="margin-top:0"></p>
+        </div>
+        <ol class="timeline" id="pTimeline"></ol>
+        <div class="kv" id="pDatos"></div>
+        <h3 style="margin:26px 0 8px">Productos</h3>
+        <ul class="items-mini" id="pItems"></ul>
+      </div>
+      <div style="display:grid;gap:10px;margin-top:18px">
+        <button class="btn btn-ghost btn-block" type="button" id="btnActualizar">Actualizar ahora</button>
+        <button class="btn btn-ghost btn-block" type="button" id="btnOtro">Consultar otro pedido</button>
+      </div>
+      <p class="small muted" style="text-align:center;margin-top:14px">Esta página se actualiza automáticamente cada 30 segundos.</p>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/productos.js"></script>
+  <script src="assets/js/comun.js"></script>
+  <script src="assets/js/api.js"></script>
+  <script src="assets/js/seguimiento.js"></script>
+</body>
+</html>

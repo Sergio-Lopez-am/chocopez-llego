@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es-CO">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel de pedidos · LLEGO</title>
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111'/%3E%3Ctext x='32' y='43' font-family='Arial' font-weight='900' font-size='30' fill='%23fff' text-anchor='middle'%3ELL%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+  <!-- Acceso -->
+  <main class="login-wrap" id="vistaLogin">
+    <div class="login-card">
+      <div class="brand"><span class="brand-name">LLEGO</span><span class="brand-sub">Panel de pedidos</span></div>
+      <h1>Alistamiento y despacho</h1>
+      <p class="muted">Ingresa con la clave del equipo. El administrador gestiona alistamiento y despacho; el domiciliario ve sus entregas.</p>
+      <form class="form" id="loginForm" novalidate style="gap:14px">
+        <div class="field">
+          <label for="clave">Clave</label>
+          <input id="clave" name="clave" type="password" autocomplete="current-password" required>
+        </div>
+        <label class="check"><input type="checkbox" id="recordar"> Mantener sesión en este dispositivo</label>
+        <div class="form-error" id="loginError" role="alert" hidden></div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="loginBtn">Ingresar</button>
+      </form>
+      <div class="demo-keys" id="demoKeys" hidden>
+        <strong>Modo demostración.</strong> Clave administrador: <b>admin123</b> · Clave domiciliario: <b>domi123</b>. Los pedidos de prueba se guardan solo en este navegador.
+      </div>
+    </div>
+  </main>
+
+  <!-- Panel -->
+  <div id="vistaPanel" hidden>
+    <div class="demo-banner" id="demoBanner" hidden>Modo demostración: los pedidos se guardan solo en este navegador.</div>
+    <header class="topbar">
+      <div class="container topbar-in">
+        <div class="brand"><span class="brand-name">LLEGO</span><span class="brand-sub" id="rolLabel">Panel</span></div>
+        <nav class="topnav">
+          <a class="link-plain hide-sm" href="../" target="_blank" rel="noopener">Ver tienda</a>
+          <button class="btn btn-ghost" type="button" id="btnSalir">Salir</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container panel">
+      <div class="panel-title">
+        <h1 id="panelTitulo">Pedidos</h1>
+        <div class="toolbar">
+          <label class="switch" id="tiendaSwitch" hidden><input type="checkbox" id="tiendaAbierta" checked><span id="tiendaTxt">Tienda abierta</span></label>
+          <button class="btn btn-ghost" type="button" id="btnXML" hidden>Descargar XML</button>
+          <button class="btn btn-primary" type="button" id="btnRefrescar">Actualizar</button>
+        </div>
+      </div>
+
+      <div class="kpis" id="kpis" hidden></div>
+
+      <div class="domi-bar" id="domiBar" hidden>
+        <div class="field">
+          <label for="domiNombre">Tu nombre (domiciliario)</label>
+          <input id="domiNombre" class="input" maxlength="60" placeholder="Escribe tu nombre" autocomplete="name">
+        </div>
+        <p class="small muted" style="flex:1;min-width:200px">Se registra en cada pedido que recibas y entregues.</p>
+      </div>
+
+      <div class="panel-bar">
+        <nav class="tabs" id="tabs" role="tablist" aria-label="Fases del pedido"></nav>
+        <input class="input search" id="buscar" type="search" placeholder="Buscar por código, nombre o celular" aria-label="Buscar pedidos">
+      </div>
+      <p class="sync" id="syncInfo"></p>
+      <div class="orders" id="orders" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <datalist id="domisList"></datalist>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../assets/js/config.js"></script>
+  <script src="../assets/js/productos.js"></script>
+  <script src="../assets/js/comun.js"></script>
+  <script src="../assets/js/api.js"></script>
+  <script src="../assets/js/admin.js"></script>
+</body>
+</html>

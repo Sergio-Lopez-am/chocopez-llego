@@ -6,7 +6,7 @@ window.LLEGO_CONFIG = {
   // URL de la aplicación web de Google Apps Script (termina en /exec).
   // Mientras esté vacía, la plataforma funciona en MODO DEMOSTRACIÓN:
   // los pedidos quedan guardados solo en el navegador donde se hacen.
-  API_URL: '',
+  API_URL: 'https://script.google.com/macros/s/AKfycbycojFpkqQQG0CBg1rU1pD060GMK6rsLVQFn_Q_7ZPLsBLwlr3tv8AbTq8BTyVAmffK/exec',
 
   NEGOCIO: {
     marca: 'LLEGO',
